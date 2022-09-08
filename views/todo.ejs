@@ -11,12 +11,14 @@
         <div class="todo-container">
             <h2>To-Do List</h2>
 
+            <!-- Set up todo list as form -->
             <div class="todo">
                 <form action="/" method="POST" class="todo-header">
                     <input type="text" name="content">
                     <button type="submit"><span class="fas fa-plus"></span></button>
                 </form>
                 
+                <!-- Store all tasks in a unordered list -->
                 <ul class="todo-list">
                     <% todoTasks.forEach(details => { %>
                     <li class="todo-list-item">

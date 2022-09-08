@@ -7,6 +7,7 @@
 integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 
+<!-- Page for edited tasks -->
 <body>
     <div class="todo-container">
     <h2>To-Do List</h2>
@@ -18,6 +19,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
         </form>
 
         <ul class="todo-list">
+            <!-- Pass in updated tasks -->
             <% todoTasks.forEach(details => { %>
             <% if (details._id == idTask) { %>
             <li class="todo-list-item">
@@ -29,6 +31,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
             </li>
 
             <% } else { %>
+            <!-- Store and display tasks in a list -->
             <li class="todo-list-item">
                 <div class="todo-list-item-name"><%= details.content %></div>
                 <a href="/edit/<%= details._id %>" class="edit"> <span class="fas fa-edit"></span>

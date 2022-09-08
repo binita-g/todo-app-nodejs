@@ -4,13 +4,14 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const TodoTask = require("./models/TodoTask");
 
+// Configure .env to store DB_CONNECT string
 dotenv.config();
 
 app.use("/static", express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 
-// Connection to MongoDB
+// Set up connection to MongoDB
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
     console.log("Connected to db!");
     app.listen(3000, () => console.log("Server Up and running"));
@@ -18,13 +19,14 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
 
 app.set("view engine", "ejs");
 
+// Pass in tasks to todo.ejs
 app.get("/", (req, res) => {
     TodoTask.find({}, (err, tasks) => {
         res.render("todo.ejs", { todoTasks: tasks });
     });
 });
 
-//POST METHOD
+// POST METHOD: Save tasks to database
 app.post('/',async (req, res) => {
     const todoTask = new TodoTask({
         content: req.body.content
@@ -37,7 +39,7 @@ app.post('/',async (req, res) => {
     }
 });
 
-// UPDATE
+// UPDATE: Update or change existing task
 app.route("/edit/:id")
     .get((req, res) => {
         const id = req.params.id;
@@ -53,7 +55,7 @@ app.route("/edit/:id")
     });
 });
 
-// DELETE
+// DELETE: Delete an existing task
 app.route("/remove/:id").get((req, res) => {
     const id = req.params.id;
     
