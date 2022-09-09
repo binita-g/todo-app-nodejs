@@ -1,31 +1,41 @@
 <!DOCTYPE html>
     <head>
     <title>Todo App - NodeJS and MongoDB</title>
+    <!-- Use styling from external styling sheet -->
+
     <link rel="stylesheet" href="/static/stylesheets/style.css" type="text/css">
+    <!-- Load in fonts for styling -->
+
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     </head>
     <body>
+        <!-- Create an outer container for to do list and tasks-->
         <div class="todo-container">
             <h2>To-Do List</h2>
 
             <!-- Set up todo list as form -->
             <div class="todo">
+                <!-- Send tasks to database by sending a POST request through the form -->
                 <form action="/" method="POST" class="todo-header">
                     <input type="text" name="content">
+                    <!-- "Add task" submission button -->
                     <button type="submit"><span class="fas fa-plus"></span></button>
                 </form>
                 
                 <!-- Store all tasks in a unordered list -->
                 <ul class="todo-list">
                     <% todoTasks.forEach(details => { %>
+                    <!-- Store the information for each task item to send back to database -->
                     <li class="todo-list-item">
                         <div class="todo-list-item-name"><%= details.content %></div>
+                        <!-- Edit button -->
                         <a href="/edit/<%= details._id %>" class="edit">
                             <span class="fas fa-edit"></span>
                         </a>
+                        <!-- Remove button -->
                         <a href="/remove/<%= details._id %>" class="remove">
                             <span class="fas fa-times"></span>
                         </a>

@@ -12,20 +12,26 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
     <div class="todo-container">
     <h2>To-Do List</h2>
     
+    <!-- Send edited tasks to database through a POST method in a form -->
     <div class="todo">
         <form action="" method="POST" class="todo-header">
             <input type="text" name="content">
+            <!-- Submit button -->
             <button type="submit"><span class="fas fa-plus"></span></button>
         </form>
 
+        <!-- Store tasks in unordered list-->
         <ul class="todo-list">
             <!-- Pass in updated tasks -->
             <% todoTasks.forEach(details => { %>
             <% if (details._id == idTask) { %>
+            <!-- Store list items details and send a POST request to database -->
             <li class="todo-list-item">
                 <form action="/edit/<%= details._id %>" method="POST">
                     <input type="text" value="<%= details.content %>" name="content">
+                    <!-- Confirm button to save edit -->
                     <button type="submit">Confirm</button>
+                    <!-- Cancel button to discard edit -->
                     <a href="/" class="cancel">Cancel</a>
                 </form>
             </li>
@@ -33,9 +39,14 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
             <% } else { %>
             <!-- Store and display tasks in a list -->
             <li class="todo-list-item">
+                <!-- Send list item details to database -->
                 <div class="todo-list-item-name"><%= details.content %></div>
+
+                <!-- Edit button -->
                 <a href="/edit/<%= details._id %>" class="edit"> <span class="fas fa-edit"></span>
                 </a>
+
+                <!-- Remove button -->
                 <a href="/remove/<%= details._id %>" class="remove"> <span class="fas fa-times"></span>
                 </a>
             </li>
