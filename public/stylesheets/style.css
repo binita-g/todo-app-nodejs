@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/* Set dark mode background */
 body {
     background: #000000;
     font-family: 'Poppins';
@@ -30,6 +31,7 @@ body {
     width: 400px;
 }
 
+/* Style heading */
 .todo-container h2 {
     padding: 10px;
     font-family: 'Poppins';
@@ -65,6 +67,7 @@ body {
     list-style: none;
 }
 
+/* Use flexbox to style list of tasks */
 .todo-list-item {
     padding: 10px;
     margin-top: 10px;
@@ -103,6 +106,7 @@ body {
     background-color: rgb(51, 212, 100);
 }
 
+/* Style the "cancel" button when editing task */
 .todo-list-item .cancel {
     color: white;
     text-decoration: none;

@@ -4,11 +4,13 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const TodoTask = require("./models/TodoTask");
 
-// Configure .env to store DB_CONNECT string
+// Configure .env to store DB_CONNECT string, which is used to create a secure username/password connection with Mongo.
 dotenv.config();
 
+// Access styling from the "public" folder as middleware.
 app.use("/static", express.static("public"));
 
+// Parse incoming requests.
 app.use(express.urlencoded({ extended: true }));
 
 // Set up connection to MongoDB
@@ -17,6 +19,7 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
     app.listen(3000, () => console.log("Server Up and running"));
 });
 
+// Use "ejs" files for views.
 app.set("view engine", "ejs");
 
 // Pass in tasks to todo.ejs
@@ -42,12 +45,14 @@ app.post('/',async (req, res) => {
 // UPDATE: Update or change existing task
 app.route("/edit/:id")
     .get((req, res) => {
+        // Find existing task that is being changed.
         const id = req.params.id;
         TodoTask.find({}, (err, tasks) => {
             res.render("todoEdit.ejs", { todoTasks: tasks, idTask: id });
         });
     })
     .post((req, res) => {
+        // Render the tasks list with the "todoEdits" view.
         const id = req.params.id;
         TodoTask.findByIdAndUpdate(id, { content: req.body.content }, err => {
         if (err) return res.send(500, err);
